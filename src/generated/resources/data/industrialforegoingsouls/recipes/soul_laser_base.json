@@ -1,0 +1,51 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:item_exists",
+              "item": "industrialforegoingsouls:soul_laser_base"
+            }
+          ]
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "A": {
+            "tag": "forge:plastic"
+          },
+          "B": {
+            "item": "minecraft:sculk_shrieker"
+          },
+          "C": {
+            "item": "minecraft:iron_bars"
+          },
+          "D": {
+            "tag": "industrialforegoing:machine_frame/advanced"
+          },
+          "G": {
+            "tag": "forge:gears/diamond"
+          },
+          "S": {
+            "item": "minecraft:sculk_catalyst"
+          }
+        },
+        "pattern": [
+          "ABA",
+          "CDC",
+          "GSG"
+        ],
+        "result": {
+          "item": "industrialforegoingsouls:soul_laser_base"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

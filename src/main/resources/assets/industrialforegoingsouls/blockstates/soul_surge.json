@@ -1,0 +1,50 @@
+{
+  "variants": {
+    "enabled=true,facing=north": {
+      "model": "industrialforegoingsouls:block/soul_surge"
+    },
+    "enabled=true,facing=south": {
+      "model": "industrialforegoingsouls:block/soul_surge",
+      "x": 180
+    },
+    "enabled=true,facing=down": {
+      "model": "industrialforegoingsouls:block/soul_surge",
+      "x": 90
+    },
+    "enabled=true,facing=up": {
+      "model": "industrialforegoingsouls:block/soul_surge",
+      "x": -90
+    },
+    "enabled=true,facing=east": {
+      "model": "industrialforegoingsouls:block/soul_surge",
+      "y": 90
+    },
+    "enabled=true,facing=west": {
+      "model": "industrialforegoingsouls:block/soul_surge",
+      "y": -90
+    },
+    "enabled=false,facing=north": {
+      "model": "industrialforegoingsouls:block/soul_surge_off"
+    },
+    "enabled=false,facing=south": {
+      "model": "industrialforegoingsouls:block/soul_surge_off",
+      "x": 180
+    },
+    "enabled=false,facing=down": {
+      "model": "industrialforegoingsouls:block/soul_surge_off",
+      "x": 90
+    },
+    "enabled=false,facing=up": {
+      "model": "industrialforegoingsouls:block/soul_surge_off",
+      "x": -90
+    },
+    "enabled=false,facing=east": {
+      "model": "industrialforegoingsouls:block/soul_surge_off",
+      "y": 90
+    },
+    "enabled=false,facing=west": {
+      "model": "industrialforegoingsouls:block/soul_surge_off",
+      "y": -90
+    }
+  }
+}

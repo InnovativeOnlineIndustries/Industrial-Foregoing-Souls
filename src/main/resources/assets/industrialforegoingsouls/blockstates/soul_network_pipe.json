@@ -1,0 +1,115 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_network_pipe_middle"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_network_pipe_side"
+      },
+      "when": {
+        "north": "block"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_network_pipe_side_to_pipe"
+      },
+      "when": {
+        "north": "pipe"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_network_pipe_side",
+        "y": 180
+      },
+      "when": {
+        "south": "block"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_network_pipe_side_to_pipe",
+        "y": 180
+      },
+      "when": {
+        "south": "pipe"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_network_pipe_side",
+        "y": 90
+      },
+      "when": {
+        "east": "block"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_network_pipe_side_to_pipe",
+        "y": 90
+      },
+      "when": {
+        "east": "pipe"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_network_pipe_side",
+        "y": 270
+      },
+      "when": {
+        "west": "block"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_network_pipe_side_to_pipe",
+        "y": 270
+      },
+      "when": {
+        "west": "pipe"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_network_pipe_side",
+        "x": 90
+      },
+      "when": {
+        "down": "block"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_network_pipe_side_to_pipe",
+        "x": 90
+      },
+      "when": {
+        "down": "pipe"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_network_pipe_side",
+        "x": 270
+      },
+      "when": {
+        "up": "block"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_network_pipe_side_to_pipe",
+        "x": 270
+      },
+      "when": {
+        "up": "pipe"
+      }
+    }
+  ]
+}
