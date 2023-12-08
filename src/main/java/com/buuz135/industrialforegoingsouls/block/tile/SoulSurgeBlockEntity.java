@@ -48,12 +48,14 @@ public class SoulSurgeBlockEntity extends NetworkBlockEntity<SoulSurgeBlockEntit
                 var targetingState = level.getBlockState(pos.relative(state.getValue(RotatableBlock.FACING_ALL).getOpposite()));
                 if (!targetingState.is(SoulTags.Blocks.CANT_ACCELERATE)) {
                     BlockEntity targetingTile = level.getBlockEntity(pos.relative(state.getValue(RotatableBlock.FACING_ALL).getOpposite()));
-                    BlockEntityTicker<BlockEntity> ticker = (BlockEntityTicker<BlockEntity>) targetingState.getTicker(this.level, targetingTile.getType());
-                    if (ticker != null) {
-                        for (int i = 0; i < ConfigSoulSurge.ACCELERATION_TICK; i++) {
-                            ticker.tick(level, pos.relative(state.getValue(RotatableBlock.FACING_ALL).getOpposite()), targetingState, targetingTile);
+                    if (targetingTile != null) {
+                        BlockEntityTicker<BlockEntity> ticker = (BlockEntityTicker<BlockEntity>) targetingState.getTicker(this.level, targetingTile.getType());
+                        if (ticker != null) {
+                            for (int i = 0; i < ConfigSoulSurge.ACCELERATION_TICK; i++) {
+                                ticker.tick(level, pos.relative(state.getValue(RotatableBlock.FACING_ALL).getOpposite()), targetingState, targetingTile);
+                            }
+                            --tickingTime;
                         }
-                        --tickingTime;
                     }
                 }
             }
