@@ -41,4 +41,4 @@ jobs:
           changelog: "https://github.com/InnovativeOnlineIndustries/Industrial-Foregoing-Souls/blob/master/CHANGELOG.md"
           dependencies: |
             titanium | depends
-            industrialforegoing | depends
+            industrial-foregoing | depends
