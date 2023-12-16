@@ -1,6 +1,7 @@
 package com.buuz135.industrialforegoingsouls.data;
 
 import com.buuz135.industrialforegoingsouls.IndustrialForegoingSouls;
+import com.buuz135.industrialforegoingsouls.tag.SoulTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -21,5 +22,6 @@ public class IFSoulsTagProvider extends BlockTagsProvider {
                 .add(IndustrialForegoingSouls.SOUL_LASER_BLOCK.getKey().get())
                 .add(IndustrialForegoingSouls.SOUL_PIPE_BLOCK.getKey().get())
                 .add(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.getKey().get());
+        tag(SoulTags.Blocks.CANT_ACCELERATE).add(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.getKey().get());
     }
 }
