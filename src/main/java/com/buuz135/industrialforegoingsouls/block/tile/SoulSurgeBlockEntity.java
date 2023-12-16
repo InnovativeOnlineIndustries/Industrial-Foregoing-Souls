@@ -41,6 +41,7 @@ public class SoulSurgeBlockEntity extends NetworkBlockEntity<SoulSurgeBlockEntit
                     if (soulTile instanceof SoulLaserBaseBlockEntity soulLaserBaseBlockEntity && soulLaserBaseBlockEntity.getSoulAmount() > 0) {
                         soulLaserBaseBlockEntity.useSoul();
                         tickingTime = ConfigSoulSurge.SOUL_TIME;
+                        break;
                     }
                 }
             }
