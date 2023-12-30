@@ -5,10 +5,7 @@ import com.buuz135.industrialforegoingsouls.block.SoulPipeBlock;
 import com.buuz135.industrialforegoingsouls.block.SoulSurgeBlock;
 import com.buuz135.industrialforegoingsouls.block_network.DefaultSoulNetworkElement;
 import com.buuz135.industrialforegoingsouls.block_network.SoulNetwork;
-import com.buuz135.industrialforegoingsouls.data.IFSoulsLangProvider;
-import com.buuz135.industrialforegoingsouls.data.IFSoulsRecipeProvider;
-import com.buuz135.industrialforegoingsouls.data.IFSoulsSerializableRecipe;
-import com.buuz135.industrialforegoingsouls.data.IFSoulsTagProvider;
+import com.buuz135.industrialforegoingsouls.data.*;
 import com.hrznstudio.titanium.block_network.NetworkRegistry;
 import com.hrznstudio.titanium.block_network.element.NetworkElementRegistry;
 import com.hrznstudio.titanium.datagenerator.loot.TitaniumLootTableProvider;
@@ -83,5 +80,6 @@ public class IndustrialForegoingSouls extends ModuleController {
         event.getGenerator().addProvider(true, new IFSoulsRecipeProvider(event.getGenerator()));
         event.getGenerator().addProvider(true, new IFSoulsSerializableRecipe(event.getGenerator(), MOD_ID));
         event.getGenerator().addProvider(true, new IFSoulsTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), MOD_ID, event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new IFSoulsBlockstateProvider(event.getGenerator().getPackOutput(), MOD_ID, event.getExistingFileHelper()));
     }
 }

@@ -1,50 +1,417 @@
 {
-  "variants": {
-    "enabled=true,facing=north": {
-      "model": "industrialforegoingsouls:block/soul_surge"
+  "multipart": [
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge",
+        "x": 90
+      },
+      "when": {
+        "enabled": "true",
+        "facing": "down"
+      }
     },
-    "enabled=true,facing=south": {
-      "model": "industrialforegoingsouls:block/soul_surge",
-      "x": 180
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge",
+        "x": -90
+      },
+      "when": {
+        "enabled": "true",
+        "facing": "up"
+      }
     },
-    "enabled=true,facing=down": {
-      "model": "industrialforegoingsouls:block/soul_surge",
-      "x": 90
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge"
+      },
+      "when": {
+        "enabled": "true",
+        "facing": "north"
+      }
     },
-    "enabled=true,facing=up": {
-      "model": "industrialforegoingsouls:block/soul_surge",
-      "x": -90
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge",
+        "y": -180
+      },
+      "when": {
+        "enabled": "true",
+        "facing": "south"
+      }
     },
-    "enabled=true,facing=east": {
-      "model": "industrialforegoingsouls:block/soul_surge",
-      "y": 90
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge",
+        "y": -90
+      },
+      "when": {
+        "enabled": "true",
+        "facing": "west"
+      }
     },
-    "enabled=true,facing=west": {
-      "model": "industrialforegoingsouls:block/soul_surge",
-      "y": -90
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge",
+        "y": 90
+      },
+      "when": {
+        "enabled": "true",
+        "facing": "east"
+      }
     },
-    "enabled=false,facing=north": {
-      "model": "industrialforegoingsouls:block/soul_surge_off"
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_off",
+        "x": 90
+      },
+      "when": {
+        "enabled": "false",
+        "facing": "down"
+      }
     },
-    "enabled=false,facing=south": {
-      "model": "industrialforegoingsouls:block/soul_surge_off",
-      "x": 180
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_off",
+        "x": -90
+      },
+      "when": {
+        "enabled": "false",
+        "facing": "up"
+      }
     },
-    "enabled=false,facing=down": {
-      "model": "industrialforegoingsouls:block/soul_surge_off",
-      "x": 90
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_off"
+      },
+      "when": {
+        "enabled": "false",
+        "facing": "north"
+      }
     },
-    "enabled=false,facing=up": {
-      "model": "industrialforegoingsouls:block/soul_surge_off",
-      "x": -90
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_off",
+        "y": -180
+      },
+      "when": {
+        "enabled": "false",
+        "facing": "south"
+      }
     },
-    "enabled=false,facing=east": {
-      "model": "industrialforegoingsouls:block/soul_surge_off",
-      "y": 90
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_off",
+        "y": -90
+      },
+      "when": {
+        "enabled": "false",
+        "facing": "west"
+      }
     },
-    "enabled=false,facing=west": {
-      "model": "industrialforegoingsouls:block/soul_surge_off",
-      "y": -90
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_off",
+        "y": 90
+      },
+      "when": {
+        "enabled": "false",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_top_connection",
+        "x": 90
+      },
+      "when": {
+        "facing": "down",
+        "top": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_top_connection",
+        "x": -90
+      },
+      "when": {
+        "facing": "up",
+        "top": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_top_connection"
+      },
+      "when": {
+        "facing": "north",
+        "top": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_top_connection",
+        "y": -180
+      },
+      "when": {
+        "facing": "south",
+        "top": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_top_connection",
+        "y": -90
+      },
+      "when": {
+        "facing": "west",
+        "top": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_top_connection",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "top": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_up",
+        "x": 90
+      },
+      "when": {
+        "facing": "down",
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_up",
+        "x": -90
+      },
+      "when": {
+        "facing": "up",
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_up"
+      },
+      "when": {
+        "facing": "north",
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_up",
+        "y": -180
+      },
+      "when": {
+        "facing": "south",
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_up",
+        "y": -90
+      },
+      "when": {
+        "facing": "west",
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_up",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_down",
+        "x": 90
+      },
+      "when": {
+        "down": "true",
+        "facing": "down"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_down",
+        "x": -90
+      },
+      "when": {
+        "down": "true",
+        "facing": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_down"
+      },
+      "when": {
+        "down": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_down",
+        "y": -180
+      },
+      "when": {
+        "down": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_down",
+        "y": -90
+      },
+      "when": {
+        "down": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_down",
+        "y": 90
+      },
+      "when": {
+        "down": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_east",
+        "x": 90
+      },
+      "when": {
+        "east": "true",
+        "facing": "down"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_east",
+        "x": -90
+      },
+      "when": {
+        "east": "true",
+        "facing": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_east"
+      },
+      "when": {
+        "east": "true",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_east",
+        "y": -180
+      },
+      "when": {
+        "east": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_east",
+        "y": -90
+      },
+      "when": {
+        "east": "true",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_east",
+        "y": 90
+      },
+      "when": {
+        "east": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_west",
+        "x": 90
+      },
+      "when": {
+        "facing": "down",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_west",
+        "x": -90
+      },
+      "when": {
+        "facing": "up",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_west"
+      },
+      "when": {
+        "facing": "north",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_west",
+        "y": -180
+      },
+      "when": {
+        "facing": "south",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_west",
+        "y": -90
+      },
+      "when": {
+        "facing": "west",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "industrialforegoingsouls:block/soul_surge_side_connection_west",
+        "y": 90
+      },
+      "when": {
+        "facing": "east",
+        "west": "true"
+      }
     }
-  }
+  ]
 }
