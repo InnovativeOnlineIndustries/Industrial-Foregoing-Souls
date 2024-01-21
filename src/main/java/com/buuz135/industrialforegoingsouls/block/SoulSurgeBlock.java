@@ -8,17 +8,18 @@ import com.hrznstudio.titanium.block_network.INetworkDirectionalConnection;
 import com.hrznstudio.titanium.util.FacingUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -27,7 +28,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
-public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> implements INetworkDirectionalConnection {
+public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> implements INetworkDirectionalConnection, SimpleWaterloggedBlock {
 
     public static final BooleanProperty ENABLED = BooleanProperty.create("enabled");
     public static final BooleanProperty TOP_CONN = BooleanProperty.create("top");
@@ -92,8 +93,8 @@ public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> impleme
 
 
     public SoulSurgeBlock() {
-        super("soul_surge", Properties.copy(Blocks.IRON_BLOCK), SoulSurgeBlockEntity.class);
-        this.registerDefaultState(this.defaultBlockState().setValue(ENABLED, true).setValue(TOP_CONN, false));
+        super("soul_surge", Properties.copy(Blocks.IRON_BLOCK).forceSolidOn(), SoulSurgeBlockEntity.class);
+        this.registerDefaultState(this.defaultBlockState().setValue(ENABLED, true).setValue(TOP_CONN, false).setValue(BlockStateProperties.WATERLOGGED, false));
     }
 
     @Override
@@ -190,7 +191,12 @@ public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> impleme
         var upConnection = checkSurgeConnection(Direction.SOUTH, FacingUtil.Sideness.TOP, context.getClickedFace(), context.getLevel(), context.getClickedPos());
         var downConnection = checkSurgeConnection(Direction.NORTH, FacingUtil.Sideness.BOTTOM, context.getClickedFace(), context.getLevel(), context.getClickedPos());
 
-        return this.defaultBlockState()
+        var state = this.defaultBlockState();
+        var fluid = context.getLevel().getFluidState(context.getClickedPos());
+        if (fluid.is(FluidTags.WATER) && fluid.getAmount() == 8)
+            state = state.setValue(BlockStateProperties.WATERLOGGED, true);
+
+        return state
                 .setValue(RotatableBlock.FACING_ALL, context.getClickedFace())
                 .setValue(TOP_CONN, pipeConnection)
                 .setValue(EAST_CONN, eastConnection)
@@ -268,6 +274,12 @@ public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> impleme
         stateBuilder.add(DOWN_CONN);
         stateBuilder.add(EAST_CONN);
         stateBuilder.add(WEST_CONN);
+        stateBuilder.add(BlockStateProperties.WATERLOGGED);
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState p_56969_) {
+        return p_56969_.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(p_56969_);
     }
 
     @Override

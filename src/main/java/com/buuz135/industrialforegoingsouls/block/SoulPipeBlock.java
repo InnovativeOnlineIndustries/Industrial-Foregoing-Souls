@@ -19,12 +19,15 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -37,7 +40,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.function.Function;
 
-public class SoulPipeBlock extends BasicTileBlock<SoulPipeBlockEntity> implements INetworkDirectionalConnection {
+public class SoulPipeBlock extends BasicTileBlock<SoulPipeBlockEntity> implements INetworkDirectionalConnection, SimpleWaterloggedBlock {
 
     public static final Map<Direction, EnumProperty<PipeState>> DIRECTIONS = new HashMap<>();
     public static final Map<Direction, VoxelShape> DIR_SHAPES = ImmutableMap.<Direction, VoxelShape>builder()
@@ -59,8 +62,9 @@ public class SoulPipeBlock extends BasicTileBlock<SoulPipeBlockEntity> implement
     }
 
     public SoulPipeBlock() {
-        super("soul_network_pipe", Properties.copy(Blocks.IRON_BLOCK), SoulPipeBlockEntity.class);
+        super("soul_network_pipe", Properties.copy(Blocks.IRON_BLOCK).forceSolidOn(), SoulPipeBlockEntity.class);
         setItemGroup(IndustrialForegoingSouls.TAB);
+        this.registerDefaultState(this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
     }
 
     @Override
@@ -79,7 +83,6 @@ public class SoulPipeBlock extends BasicTileBlock<SoulPipeBlockEntity> implement
         var fluid = world.getFluidState(pos);
         if (fluid.is(FluidTags.WATER) && fluid.getAmount() == 8)
             state = state.setValue(BlockStateProperties.WATERLOGGED, true);
-
         for (var dir : Direction.values()) {
             var prop = DIRECTIONS.get(dir);
             var type = this.getConnectionType(world, pos, dir, state);
@@ -185,6 +188,11 @@ public class SoulPipeBlock extends BasicTileBlock<SoulPipeBlockEntity> implement
                 }
             }
         }
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState p_56969_) {
+        return p_56969_.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(p_56969_);
     }
 
     public enum PipeState implements StringRepresentable {
