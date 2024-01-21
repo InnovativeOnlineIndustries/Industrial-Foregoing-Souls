@@ -181,6 +181,10 @@ public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> impleme
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         var pipeConnection = context.getLevel().getBlockState(context.getClickedPos().relative(context.getClickedFace())).getBlock().equals(IndustrialForegoingSouls.SOUL_PIPE_BLOCK.getKey().get());
+        if (!pipeConnection) {
+            var relativeBlockstate = context.getLevel().getBlockState(context.getClickedPos().relative(context.getClickedFace().getAxis().isVertical() ? context.getClickedFace() : FacingUtil.getFacingFromSide(context.getClickedFace(), FacingUtil.Sideness.FRONT)));
+            pipeConnection = relativeBlockstate.getBlock().equals(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.getKey().get()) && relativeBlockstate.getValue(RotatableBlock.FACING_ALL) == context.getClickedFace().getOpposite();
+        }
         var eastConnection = checkSurgeConnection(Direction.EAST, FacingUtil.Sideness.LEFT, context.getClickedFace(), context.getLevel(), context.getClickedPos());
         var westConnection = checkSurgeConnection(Direction.WEST, FacingUtil.Sideness.RIGHT, context.getClickedFace(), context.getLevel(), context.getClickedPos());
         var upConnection = checkSurgeConnection(Direction.SOUTH, FacingUtil.Sideness.TOP, context.getClickedFace(), context.getLevel(), context.getClickedPos());
@@ -209,6 +213,10 @@ public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> impleme
             var needStateRefresh = false;
             var originalPipeConnection = state.getValue(TOP_CONN);
             var pipeConnection = level.getBlockState(pos.relative(facing)).getBlock().equals(IndustrialForegoingSouls.SOUL_PIPE_BLOCK.getKey().get());
+            if (!pipeConnection) {
+                var relativeBlockstate = level.getBlockState(pos.relative(facing.getAxis().isVertical() ? facing : FacingUtil.getFacingFromSide(facing, FacingUtil.Sideness.FRONT)));
+                pipeConnection = relativeBlockstate.getBlock().equals(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.getKey().get()) && relativeBlockstate.getValue(RotatableBlock.FACING_ALL) == facing.getOpposite();
+            }
             state = state.setValue(TOP_CONN, pipeConnection);
             if (originalPipeConnection != pipeConnection) {
                 needStateRefresh = true;
