@@ -10,8 +10,16 @@ public class ConfigSoulSurge {
     @ConfigVal(comment = "How long in ticks a soul last to accelerate ticks")
     public static int SOUL_TIME = 15 * 20;
 
-    @ConfigVal(comment = "How many extra ticks the surge will accelerate")
-    @ConfigVal.InRangeInt(min = 1)
+    @ConfigVal(comment = "How many extra ticks the surge will accelerate for tile entities")
+    @ConfigVal.InRangeInt(min = 0)
     public static int ACCELERATION_TICK = 4;
+
+    @ConfigVal(comment = "How many extra ticks the surge will accelerate for mobs")
+    @ConfigVal.InRangeInt(min = 0)
+    public static int ENTITIES_ACCELERATION_TICK = 4;
+
+    @ConfigVal(comment = "How many extra ticks the surge will accelerate for blocks")
+    @ConfigVal.InRangeInt(min = 0)
+    public static int BLOCK_ACCELERATION_TICK = 4;
 
 }

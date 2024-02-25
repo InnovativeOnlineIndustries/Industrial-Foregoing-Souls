@@ -1,3 +1,10 @@
+# Version 1.0.4
+
+* Acceleration config for tile entities can now be 0 ticks
+* Added support for accelerating entities, entities can be added to the `industrialforegoingsouls:cant_accelerate` tag
+  to disable them accelerating
+* Added support for acceleration random ticks
+
 # Version 1.0.3
 
 * Soul surges can now connect between eachother
