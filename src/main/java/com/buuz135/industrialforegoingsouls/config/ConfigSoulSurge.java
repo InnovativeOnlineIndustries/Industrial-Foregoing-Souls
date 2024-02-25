@@ -22,4 +22,7 @@ public class ConfigSoulSurge {
     @ConfigVal.InRangeInt(min = 0)
     public static int BLOCK_ACCELERATION_TICK = 4;
 
+    @ConfigVal(comment = "How often a random tick block will be accelerated, by default 3% of the ticks (random)")
+    @ConfigVal.InRangeInt(min = 0, max = 1)
+    public static double RANDOM_TICK_ACCELERATION_CHANCE = 0.03;
 }

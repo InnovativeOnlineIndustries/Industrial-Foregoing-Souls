@@ -1,4 +1,8 @@
-# Version 1.0.4
+# Version 1.0.6
+
+* Reduced how often the random tick blocks get accelerated, and added a config option to change it
+
+# Version 1.0.5
 
 * Acceleration config for tile entities can now be 0 ticks
 * Added support for accelerating entities, entities can be added to the `industrialforegoingsouls:cant_accelerate` tag

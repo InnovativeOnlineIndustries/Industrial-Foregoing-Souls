@@ -62,8 +62,10 @@ public class SoulSurgeBlockEntity extends NetworkBlockEntity<SoulSurgeBlockEntit
                             --tickingTime;
                         }
                     } else if (level instanceof ServerLevel serverLevel) {
-                        for (int i = 0; i < ConfigSoulSurge.BLOCK_ACCELERATION_TICK; i++) {
-                            targetingState.randomTick(serverLevel, pos.relative(state.getValue(RotatableBlock.FACING_ALL).getOpposite()), serverLevel.random);
+                        if (serverLevel.random.nextDouble() < ConfigSoulSurge.RANDOM_TICK_ACCELERATION_CHANCE) {
+                            for (int i = 0; i < ConfigSoulSurge.BLOCK_ACCELERATION_TICK; i++) {
+                                targetingState.randomTick(serverLevel, pos.relative(state.getValue(RotatableBlock.FACING_ALL).getOpposite()), serverLevel.random);
+                            }
                         }
                         --tickingTime;
                     }
