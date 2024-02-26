@@ -1,3 +1,7 @@
+# Version 1.0.7
+
+* Fixed config not working properly, closes #4
+
 # Version 1.0.6
 
 * Reduced how often the random tick blocks get accelerated, and added a config option to change it
