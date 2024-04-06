@@ -12,6 +12,7 @@ public class SoulTags {
     public static class Blocks {
 
         public static final TagKey<Block> CANT_ACCELERATE = TagUtil.getBlockTag(new ResourceLocation(IndustrialForegoingSouls.MOD_ID, "cant_accelerate"));
+        public static final TagKey<Block> FORGE_CANT_ACCELERATE = TagUtil.getBlockTag(new ResourceLocation("forge", "tick_acceleration_disallowed"));
     }
 
     public static class Entities {

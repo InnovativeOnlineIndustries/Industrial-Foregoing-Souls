@@ -23,5 +23,6 @@ public class IFSoulsTagProvider extends BlockTagsProvider {
                 .add(IndustrialForegoingSouls.SOUL_PIPE_BLOCK.getKey().get())
                 .add(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.getKey().get());
         tag(SoulTags.Blocks.CANT_ACCELERATE).add(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.getKey().get());
+        tag(SoulTags.Blocks.FORGE_CANT_ACCELERATE).add(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.getKey().get());
     }
 }

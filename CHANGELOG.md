@@ -1,3 +1,7 @@
+# Version 1.0.8
+
+* Added support for forge:tick_acceleration_disallowed tag
+
 # Version 1.0.7
 
 * Fixed config not working properly, closes #4
