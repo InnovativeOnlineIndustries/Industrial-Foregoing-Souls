@@ -93,7 +93,7 @@ public class SoulPipeBlock extends BasicTileBlock<SoulPipeBlockEntity> implement
 
     protected PipeState getConnectionType(Level world, BlockPos pos, Direction direction, BlockState state) {
         var relativeState = world.getBlockState(pos.relative(direction));
-        if (relativeState.getBlock() instanceof SoulPipeBlock) {
+        if (relativeState.getBlock() instanceof SoulPipeBlock || relativeState.getBlock() instanceof SoulSurgeBlock || relativeState.getBlock().equals(Blocks.STONE_BRICKS)) {
             return PipeState.PIPE;
         }
         if (relativeState.getBlock() instanceof INetworkDirectionalConnection networkDirectionalConnection && networkDirectionalConnection.canConnect(relativeState, direction.getOpposite())) {

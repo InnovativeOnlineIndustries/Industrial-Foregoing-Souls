@@ -26,6 +26,9 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> implements INetworkDirectionalConnection, SimpleWaterloggedBlock {
@@ -38,59 +41,54 @@ public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> impleme
     public static final BooleanProperty WEST_CONN = BooleanProperty.create("west");
 
     public static VoxelShape NORTH = Stream.of(
-            Block.box(5, 5, 0, 5, 11, 5),
-            Block.box(11, 5, 0, 11, 11, 5),
-            Block.box(5, 5, 0, 11, 5, 5),
-            Block.box(4, 4, 5, 12, 12, 14),
-            Block.box(3, 3, 6, 13, 13, 8),
-            Block.box(3, 3, 14, 13, 13, 16)
+            Block.box(4, 4, 2, 12, 12, 11),
+            Block.box(4, 4, 3, 12, 12, 10),
+            Block.box(3, 3, 3, 13, 13, 5),
+            Block.box(3, 3, 11, 13, 13, 16),
+            Block.box(3, 3, 11, 13, 13, 16)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public static VoxelShape EAST = Stream.of(
-            Block.box(11, 5, 5, 16, 11, 5),
-            Block.box(11, 5, 11, 16, 11, 11),
-            Block.box(11, 5, 5, 16, 5, 11),
-            Block.box(2, 4, 4, 11, 12, 12),
-            Block.box(8, 3, 3, 10, 13, 13),
-            Block.box(0, 3, 3, 2, 13, 13)
+            Block.box(5, 4, 4, 14, 12, 12),
+            Block.box(6, 4, 4, 13, 12, 12),
+            Block.box(11, 3, 3, 13, 13, 13),
+            Block.box(0, 3, 3, 5, 13, 13),
+            Block.box(0, 3, 3, 5, 13, 13)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public static VoxelShape SOUTH = Stream.of(
-            Block.box(11, 5, 11, 11, 11, 16),
-            Block.box(5, 5, 11, 5, 11, 16),
-            Block.box(5, 5, 11, 11, 5, 16),
-            Block.box(4, 4, 2, 12, 12, 11),
-            Block.box(3, 3, 8, 13, 13, 10),
-            Block.box(3, 3, 0, 13, 13, 2)
+            Block.box(4, 4, 5, 12, 12, 14),
+            Block.box(4, 4, 6, 12, 12, 13),
+            Block.box(3, 3, 11, 13, 13, 13),
+            Block.box(3, 3, 0, 13, 13, 5),
+            Block.box(3, 3, 0, 13, 13, 5)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public static VoxelShape WEST = Stream.of(
-            Block.box(0, 5, 11, 5, 11, 11),
-            Block.box(0, 5, 5, 5, 11, 5),
-            Block.box(0, 5, 5, 5, 5, 11),
-            Block.box(5, 4, 4, 14, 12, 12),
-            Block.box(6, 3, 3, 8, 13, 13),
-            Block.box(14, 3, 3, 16, 13, 13)
+            Block.box(2, 4, 4, 11, 12, 12),
+            Block.box(3, 4, 4, 10, 12, 12),
+            Block.box(3, 3, 3, 5, 13, 13),
+            Block.box(11, 3, 3, 16, 13, 13),
+            Block.box(11, 3, 3, 16, 13, 13)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public static VoxelShape UP = Stream.of(
-            Block.box(5, 11, 11, 11, 16, 11),
-            Block.box(5, 11, 5, 11, 16, 5),
-            Block.box(5, 11, 5, 5, 16, 11),
-            Block.box(4, 2, 4, 12, 11, 12),
-            Block.box(3, 8, 3, 13, 10, 13),
-            Block.box(3, 0, 3, 13, 2, 13)
+            Block.box(4, 5, 4, 12, 14, 12),
+            Block.box(4, 6, 4, 12, 13, 12),
+            Block.box(3, 11, 3, 13, 13, 13),
+            Block.box(3, 0, 3, 13, 5, 13),
+            Block.box(3, 0, 3, 13, 5, 13)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public static VoxelShape DOWN = Stream.of(
-            Block.box(5, 0, 5, 11, 5, 5),
-            Block.box(5, 0, 11, 11, 5, 11),
-            Block.box(5, 0, 5, 5, 5, 11),
-            Block.box(4, 5, 4, 12, 14, 12),
-            Block.box(3, 6, 3, 13, 8, 13),
-            Block.box(3, 14, 3, 13, 16, 13)
+            Block.box(4, 2, 4, 12, 11, 12),
+            Block.box(4, 3, 4, 12, 10, 12),
+            Block.box(3, 3, 3, 13, 5, 13),
+            Block.box(3, 11, 3, 13, 16, 13),
+            Block.box(3, 11, 3, 13, 16, 13)
     ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-
+    private static final Map<BlockState, VoxelShape> SHAPE_CACHE = new HashMap<>();
+    private static final Map<BlockState, VoxelShape> COLL_SHAPE_CACHE = new HashMap<>();
 
     public SoulSurgeBlock() {
         super("soul_surge", Properties.copy(Blocks.IRON_BLOCK).forceSolidOn(), SoulSurgeBlockEntity.class);
@@ -181,11 +179,8 @@ public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> impleme
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        var pipeConnection = context.getLevel().getBlockState(context.getClickedPos().relative(context.getClickedFace())).getBlock().equals(IndustrialForegoingSouls.SOUL_PIPE_BLOCK.getKey().get());
-        if (!pipeConnection) {
-            var relativeBlockstate = context.getLevel().getBlockState(context.getClickedPos().relative(context.getClickedFace().getAxis().isVertical() ? context.getClickedFace() : FacingUtil.getFacingFromSide(context.getClickedFace(), FacingUtil.Sideness.FRONT)));
-            pipeConnection = relativeBlockstate.getBlock().equals(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.getKey().get()) && relativeBlockstate.getValue(RotatableBlock.FACING_ALL) == context.getClickedFace().getOpposite();
-        }
+        var pipeBlockstate = context.getLevel().getBlockState(context.getClickedPos().relative(context.getClickedFace()));
+        var pipeConnection = pipeBlockstate.getBlock() instanceof SoulPipeBlock || pipeBlockstate.getBlock().equals(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.getKey().get());
         var eastConnection = checkSurgeConnection(Direction.EAST, FacingUtil.Sideness.LEFT, context.getClickedFace(), context.getLevel(), context.getClickedPos());
         var westConnection = checkSurgeConnection(Direction.WEST, FacingUtil.Sideness.RIGHT, context.getClickedFace(), context.getLevel(), context.getClickedPos());
         var upConnection = checkSurgeConnection(Direction.SOUTH, FacingUtil.Sideness.TOP, context.getClickedFace(), context.getLevel(), context.getClickedPos());
@@ -208,7 +203,7 @@ public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> impleme
 
     private boolean checkSurgeConnection(Direction direction, FacingUtil.Sideness sideness, Direction clickedFace, Level level, BlockPos clickedPos) {
         var relativeBlockstate = level.getBlockState(clickedPos.relative(clickedFace.getAxis().isVertical() ? direction : FacingUtil.getFacingFromSide(clickedFace, sideness)));
-        return relativeBlockstate.getBlock().equals(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.getKey().get()) && relativeBlockstate.getValue(RotatableBlock.FACING_ALL) == clickedFace;
+        return relativeBlockstate.getBlock() instanceof SoulPipeBlock || relativeBlockstate.getBlock().equals(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.getKey().get());
     }
 
     @Override
@@ -218,11 +213,8 @@ public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> impleme
             var facing = state.getValue(RotatableBlock.FACING_ALL);
             var needStateRefresh = false;
             var originalPipeConnection = state.getValue(TOP_CONN);
-            var pipeConnection = level.getBlockState(pos.relative(facing)).getBlock().equals(IndustrialForegoingSouls.SOUL_PIPE_BLOCK.getKey().get());
-            if (!pipeConnection) {
-                var relativeBlockstate = level.getBlockState(pos.relative(facing.getAxis().isVertical() ? facing : FacingUtil.getFacingFromSide(facing, FacingUtil.Sideness.FRONT)));
-                pipeConnection = relativeBlockstate.getBlock().equals(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.getKey().get()) && relativeBlockstate.getValue(RotatableBlock.FACING_ALL) == facing.getOpposite();
-            }
+            var pipeBlockstate = level.getBlockState(pos.relative(facing));
+            var pipeConnection = pipeBlockstate.getBlock() instanceof SoulPipeBlock || pipeBlockstate.getBlock().equals(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.getKey().get());
             state = state.setValue(TOP_CONN, pipeConnection);
             if (originalPipeConnection != pipeConnection) {
                 needStateRefresh = true;
