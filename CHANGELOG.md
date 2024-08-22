@@ -1,3 +1,8 @@
+# Version 1.0.9
+
+* Made Soul Surges able to connect from any side, closes #7
+* Hopefully fixed loading deadlocks, closes #3 closes #6
+
 # Version 1.0.8
 
 * Added support for forge:tick_acceleration_disallowed tag
