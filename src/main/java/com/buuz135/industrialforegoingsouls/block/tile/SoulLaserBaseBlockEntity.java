@@ -24,6 +24,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -45,9 +46,9 @@ import java.util.List;
 public class SoulLaserBaseBlockEntity extends IndustrialMachineTile<SoulLaserBaseBlockEntity> implements ILaserBase<SoulLaserBaseBlockEntity> {
 
     @Save
-    private ProgressBarComponent<SoulLaserBaseBlockEntity> work;
+    private final ProgressBarComponent<SoulLaserBaseBlockEntity> work;
     @Save
-    private SidedInventoryComponent<SoulLaserBaseBlockEntity> catalyst;
+    private final SidedInventoryComponent<SoulLaserBaseBlockEntity> catalyst;
     @Save
     private int soulAmount;
     private boolean unloaded;
@@ -167,12 +168,14 @@ public class SoulLaserBaseBlockEntity extends IndustrialMachineTile<SoulLaserBas
     @Override
     public void clearRemoved() {
         super.clearRemoved();
-        if (!level.isClientSide) {
-            NetworkManager networkManager = NetworkManager.get(level);
+        if (level instanceof ServerLevel serverLevel) {
+            serverLevel.getServer().submitAsync(() -> {
+                NetworkManager networkManager = NetworkManager.get(level);
 
-            if (networkManager.getElement(worldPosition) == null) {
-                networkManager.addElement(createElement(level, worldPosition));
-            }
+                if (networkManager.getElement(worldPosition) == null) {
+                    networkManager.addElement(createElement(level, worldPosition));
+                }
+            });
         }
     }
 

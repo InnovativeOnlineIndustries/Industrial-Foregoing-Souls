@@ -47,9 +47,11 @@ public class DefaultSoulNetworkElement extends NetworkElement {
 
     @Override
     public boolean canConnectFrom(Direction direction) {
-        var state = this.level.getBlockState(this.pos);
-        if (state.getBlock() instanceof INetworkDirectionalConnection networkDirectionalConnection) {
-            return networkDirectionalConnection.canConnect(state, direction);
+        if (this.level != null){
+            var state = this.level.getBlockState(this.pos);
+            if (state.getBlock() instanceof INetworkDirectionalConnection networkDirectionalConnection) {
+                return networkDirectionalConnection.canConnect(state, direction);
+            }
         }
         return true;
     }
