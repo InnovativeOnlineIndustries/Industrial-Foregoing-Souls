@@ -57,7 +57,7 @@ public class SoulLaserBaseBlockEntity extends IndustrialMachineTile<SoulLaserBas
         super(IndustrialForegoingSouls.SOUL_LASER_BLOCK, blockPos, blockState);
         this.soulAmount = 0;
         setShowEnergy(false);
-        this.addProgressBar(work = new ProgressBarComponent<SoulLaserBaseBlockEntity>(74, 24 + 18, 0, ConfigSoulLaserBase.MAX_PROGRESS) {
+        this.addProgressBar(this.work = new ProgressBarComponent<SoulLaserBaseBlockEntity>(74, 24 + 18, 0, ConfigSoulLaserBase.MAX_PROGRESS) {
                     @Override
                     @OnlyIn(Dist.CLIENT)
                     public List<IFactory<? extends IScreenAddon>> getScreenAddons() {
@@ -76,8 +76,7 @@ public class SoulLaserBaseBlockEntity extends IndustrialMachineTile<SoulLaserBas
                         .setProgressIncrease(0)
                         .setCanReset(oreLaserBaseTile -> true)
                         .setOnStart(() -> {
-                            int maxProgress = (int) Math.floor(ConfigSoulLaserBase.MAX_PROGRESS * (this.hasAugmentInstalled(AugmentTypes.EFFICIENCY) ? AugmentWrapper.getType(this.getInstalledAugments(AugmentTypes.EFFICIENCY).get(0), AugmentTypes.EFFICIENCY) : 1));
-                            work.setMaxProgress(maxProgress);
+
                         })
                         .setOnFinishWork(this::onWork)
         );
@@ -116,6 +115,8 @@ public class SoulLaserBaseBlockEntity extends IndustrialMachineTile<SoulLaserBas
                 }
             }
         }
+        int maxProgress = (int) Math.floor(ConfigSoulLaserBase.MAX_PROGRESS * (this.hasAugmentInstalled(AugmentTypes.EFFICIENCY) ? AugmentWrapper.getType(this.getInstalledAugments(AugmentTypes.EFFICIENCY).get(0), AugmentTypes.EFFICIENCY) : 1));
+        this.work.setMaxProgress(maxProgress);
     }
 
     @Override
