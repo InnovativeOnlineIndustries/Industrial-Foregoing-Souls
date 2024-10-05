@@ -66,12 +66,11 @@ repositories {
 dependencies {
     compileOnly("mezz.jei:jei-1.21.1-neoforge-api:${jei_version}")
     runtimeOnly("mezz.jei:jei-1.21.1-neoforge:${jei_version}")
-//    implementation project.dependencies.create('com.hrznstudio:titanium:1.21-4.0.21')
+    implementation project.dependencies.create('com.hrznstudio:titanium:1.21-4.0.21')
 //    implementation project.dependencies.create('com.buuz135:industrial-foregoing:1.21-3.6.13')
     implementation "vazkii.patchouli:Patchouli:${patchouli_version}"
 
-    implementation "curse.maven:titanium-287342:5726400"
-    implementation "curse.maven:industrial-foregoing-266515:5745699"
+    implementation "curse.maven:industrial-foregoing-266515:5745699" // TEMP: 1.21 Industrial Foregoing isn't on the maven yet
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
