@@ -56,9 +56,17 @@ repositories {
         name 'jared maven'
         url "https://maven.blamejared.com/"
     }
-
     maven {
-        url = "https://www.cursemaven.com"
+        url "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    repositories {
+        maven {
+            name = "TerraformersMC"
+            url = "https://maven.terraformersmc.com/"
+        }
     }
     //maven { url 'https://modmaven.dev/' }
 }
@@ -67,10 +75,10 @@ dependencies {
     compileOnly("mezz.jei:jei-1.21.1-neoforge-api:${jei_version}")
     runtimeOnly("mezz.jei:jei-1.21.1-neoforge:${jei_version}")
     implementation project.dependencies.create('com.hrznstudio:titanium:1.21-4.0.21')
-//    implementation project.dependencies.create('com.buuz135:industrial-foregoing:1.21-3.6.13')
+    implementation project.dependencies.create('com.buuz135:industrialforegoing:1.21-3.6.13')
     implementation "vazkii.patchouli:Patchouli:${patchouli_version}"
-
-    implementation "curse.maven:industrial-foregoing-266515:5745699" // TEMP: 1.21 Industrial Foregoing isn't on the maven yet
+    compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
+    runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
