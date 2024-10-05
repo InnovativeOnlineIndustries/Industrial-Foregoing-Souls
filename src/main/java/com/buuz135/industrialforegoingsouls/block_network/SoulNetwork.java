@@ -18,7 +18,7 @@ import java.util.Random;
 
 public class SoulNetwork extends Network {
 
-    public static ResourceLocation SOUL_NETWORK = new ResourceLocation(IndustrialForegoingSouls.MOD_ID, "soul");
+    public static ResourceLocation SOUL_NETWORK = ResourceLocation.fromNamespaceAndPath(IndustrialForegoingSouls.MOD_ID, "soul");
 
     private List<NetworkElement> queueNetworkElements;
     private List<NetworkElement> soulLaserDrills;

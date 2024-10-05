@@ -1,0 +1,39 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:item_exists",
+      "item": "industrialforegoingsouls:soul_laser_base"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:plastics"
+    },
+    "B": {
+      "item": "minecraft:sculk_shrieker"
+    },
+    "C": {
+      "item": "minecraft:iron_bars"
+    },
+    "D": {
+      "tag": "industrialforegoing:machine_frame/advanced"
+    },
+    "G": {
+      "tag": "c:gears/diamond"
+    },
+    "S": {
+      "item": "minecraft:sculk_catalyst"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "CDC",
+    "GSG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "industrialforegoingsouls:soul_laser_base"
+  }
+}
