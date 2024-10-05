@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:item_exists",
+      "item": "industrialforegoingsouls:soul_network_pipe"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:plastics"
+    },
+    "D": {
+      "item": "minecraft:echo_shard"
+    },
+    "S": {
+      "tag": "c:stones"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "CDC",
+    "SSS"
+  ],
+  "result": {
+    "count": 8,
+    "id": "industrialforegoingsouls:soul_network_pipe"
+  }
+}

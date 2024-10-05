@@ -45,9 +45,9 @@ public class SculkSoulTankScreenAddon extends BasicScreenAddon {
         for (GuiParticle guiParticle : particleList) {
             var particleAge = ((currentTime - guiParticle.age) / (double) ageTick);
             var extraY = -((getYSize() - 32) / 10D) * particleAge;
-            guiGraphics.blit(new ResourceLocation("minecraft", "textures/particle/sculk_soul_" + Math.max(0, Math.min(10, (int) particleAge)) + ".png"), this.getPosX() + guiX + guiParticle.x, (int) (this.getPosY() + guiY + guiParticle.y + extraY), 0, 0, 16, 16, 16, 16);
+            guiGraphics.blit(ResourceLocation.withDefaultNamespace("textures/particle/sculk_soul_" + Math.max(0, Math.min(10, (int) particleAge)) + ".png"), this.getPosX() + guiX + guiParticle.x, (int) (this.getPosY() + guiY + guiParticle.y + extraY), 0, 0, 16, 16, 16, 16);
         }
-        guiGraphics.blit(new ResourceLocation(IndustrialForegoingSouls.MOD_ID, "textures/gui/soul_tank.png"), this.getPosX() + guiX, (this.getPosY() + guiY), 0, 0, 65, 60, 65, 60);
+        guiGraphics.blit(ResourceLocation.fromNamespaceAndPath(IndustrialForegoingSouls.MOD_ID, "textures/gui/soul_tank.png"), this.getPosX() + guiX, (this.getPosY() + guiY), 0, 0, 65, 60, 65, 60);
     }
 
     @Override

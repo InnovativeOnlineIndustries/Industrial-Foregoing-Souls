@@ -2,26 +2,28 @@ package com.buuz135.industrialforegoingsouls.data;
 
 import com.buuz135.industrial.recipe.LaserDrillOreRecipe;
 import com.buuz135.industrial.recipe.LaserDrillRarity;
-import com.hrznstudio.titanium.recipe.generator.IJSONGenerator;
-import com.hrznstudio.titanium.recipe.generator.IJsonFile;
-import com.hrznstudio.titanium.recipe.generator.TitaniumSerializableProvider;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceKey;
+import com.buuz135.industrialforegoingsouls.IndustrialForegoingSouls;
+import com.buuz135.industrialforegoingsouls.tag.SoulTags;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.AdvancementRequirements;
+import net.minecraft.advancements.AdvancementRewards;
+import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.biome.Biomes;
 
-import java.util.Map;
+import java.util.List;
 
-public class IFSoulsSerializableRecipe extends TitaniumSerializableProvider {
-    public IFSoulsSerializableRecipe(DataGenerator generatorIn, String modid) {
-        super(generatorIn, modid);
-    }
+public class IFSoulsSerializableRecipe {
 
-    @Override
-    public void add(Map<IJsonFile, IJSONGenerator> serializables) {
-        var rarity = new ResourceKey[]{Biomes.DEEP_DARK};
-        var laser = new LaserDrillOreRecipe("echo_shard", Ingredient.of(Items.ECHO_SHARD), 11, null, new LaserDrillRarity(rarity, new ResourceKey[0], -64, 20, 1));
-        serializables.put(laser, laser);
+    public static void init(RecipeOutput output) {
+        var biomeRarity = new LaserDrillRarity.BiomeRarity(List.of(SoulTags.Biomes.DEEP_DARK), List.of());
+        var dimensionRarity = new LaserDrillRarity.DimensionRarity(List.of(), List.of());
+        var laser = new LaserDrillOreRecipe(Ingredient.of(Items.ECHO_SHARD), 11,
+                new LaserDrillRarity(biomeRarity, dimensionRarity, -64, 20, 1));
+        ResourceLocation rl = ResourceLocation.fromNamespaceAndPath(IndustrialForegoingSouls.MOD_ID, "laser_drill_ore/echo_shard");
+        AdvancementHolder advancementHolder = output.advancement().addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(rl)).rewards(AdvancementRewards.Builder.recipe(rl)).requirements(AdvancementRequirements.Strategy.OR).build(rl);
+        output.accept(rl, laser, advancementHolder);
     }
 }

@@ -6,11 +6,11 @@ import com.buuz135.industrialforegoingsouls.block.SoulSurgeBlock;
 import com.hrznstudio.titanium.block.RotatableBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.function.Function;
 
@@ -21,7 +21,7 @@ public class IFSoulsBlockstateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        MultiPartBlockStateBuilder model = getMultipartBuilder(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.getLeft().get());
+        MultiPartBlockStateBuilder model = getMultipartBuilder(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.block().get());
         SoulSurgeBlock.ENABLED.getAllValues().forEach(enabled -> {
             var enabledModel = new ModelFile.UncheckedModelFile("industrialforegoingsouls:block/soul_surge" + (!enabled.value() ? "_off" : ""));
             RotatableBlock.RotationType.SIX_WAY.getProperties()[0].getAllValues().forEach(rotation -> {

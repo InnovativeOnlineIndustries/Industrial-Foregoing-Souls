@@ -108,7 +108,7 @@
           "texture": "#down_leds_full"
         }
       },
-      "forge_data": {
+      "neoforge_data": {
         "block_light": 10,
         "sky_light": 10,
         "ambient_occlusion": false
@@ -174,7 +174,7 @@
           "texture": "#down_leds"
         }
       },
-      "forge_data": {
+      "neoforge_data": {
         "block_light": 15,
         "sky_light": 15,
         "ambient_occlusion": false

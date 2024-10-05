@@ -1,0 +1,26 @@
+{
+  "type": "industrialforegoing:laser_drill_ore",
+  "catalyst": {
+    "item": "industrialforegoing:blue_laser_lens"
+  },
+  "output": {
+    "item": "minecraft:echo_shard"
+  },
+  "rarity": [
+    {
+      "biome_filter": {
+        "blacklist": [],
+        "whitelist": [
+          "industrialforegoingsouls:deep_dark"
+        ]
+      },
+      "depth_max": 20,
+      "depth_min": -64,
+      "dimension_filter": {
+        "blacklist": [],
+        "whitelist": []
+      },
+      "weight": 1
+    }
+  ]
+}
