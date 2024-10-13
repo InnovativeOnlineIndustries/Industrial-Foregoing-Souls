@@ -1,0 +1,33 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:item_exists",
+      "item": "industrialforegoingsouls:soul_surge"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:stones"
+    },
+    "B": {
+      "tag": "c:plastics"
+    },
+    "C": {
+      "item": "minecraft:echo_shard"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "CBC",
+    "CPC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "industrialforegoingsouls:soul_surge"
+  }
+}

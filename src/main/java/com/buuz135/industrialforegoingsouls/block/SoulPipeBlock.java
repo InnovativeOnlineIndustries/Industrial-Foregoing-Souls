@@ -62,14 +62,14 @@ public class SoulPipeBlock extends BasicTileBlock<SoulPipeBlockEntity> implement
     }
 
     public SoulPipeBlock() {
-        super("soul_network_pipe", Properties.copy(Blocks.IRON_BLOCK).forceSolidOn(), SoulPipeBlockEntity.class);
+        super(Properties.ofFullCopy(Blocks.IRON_BLOCK).forceSolidOn(), SoulPipeBlockEntity.class);
         setItemGroup(IndustrialForegoingSouls.TAB);
         this.registerDefaultState(this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
     }
 
     @Override
     public BlockEntityType.BlockEntitySupplier<?> getTileEntityFactory() {
-        return (pos, state) -> new SoulPipeBlockEntity(this, IndustrialForegoingSouls.SOUL_PIPE_BLOCK.getRight().get(), pos, state);
+        return (pos, state) -> new SoulPipeBlockEntity(this, IndustrialForegoingSouls.SOUL_PIPE_BLOCK.type().get(), pos, state);
     }
 
     @Override

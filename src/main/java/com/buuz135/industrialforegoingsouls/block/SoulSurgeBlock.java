@@ -28,7 +28,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> implements INetworkDirectionalConnection, SimpleWaterloggedBlock {
@@ -91,7 +90,7 @@ public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> impleme
     private static final Map<BlockState, VoxelShape> COLL_SHAPE_CACHE = new HashMap<>();
 
     public SoulSurgeBlock() {
-        super("soul_surge", Properties.copy(Blocks.IRON_BLOCK).forceSolidOn(), SoulSurgeBlockEntity.class);
+        super(Properties.ofFullCopy(Blocks.IRON_BLOCK).forceSolidOn(), SoulSurgeBlockEntity.class);
         this.registerDefaultState(this.defaultBlockState().setValue(ENABLED, true).setValue(TOP_CONN, false).setValue(BlockStateProperties.WATERLOGGED, false));
     }
 
@@ -139,7 +138,7 @@ public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> impleme
 
     @Override
     public BlockEntityType.BlockEntitySupplier<?> getTileEntityFactory() {
-        return (pos, state) -> new SoulSurgeBlockEntity(this, IndustrialForegoingSouls.SOUL_SURGE_BLOCK.getRight().get(), pos, state);
+        return (pos, state) -> new SoulSurgeBlockEntity(this, IndustrialForegoingSouls.SOUL_SURGE_BLOCK.type().get(), pos, state);
     }
 
     @Override
@@ -180,7 +179,7 @@ public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> impleme
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         var pipeBlockstate = context.getLevel().getBlockState(context.getClickedPos().relative(context.getClickedFace()));
-        var pipeConnection = pipeBlockstate.getBlock() instanceof SoulPipeBlock || pipeBlockstate.getBlock().equals(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.getKey().get());
+        var pipeConnection = pipeBlockstate.getBlock() instanceof SoulPipeBlock || pipeBlockstate.getBlock().equals(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.block().get());
         var eastConnection = checkSurgeConnection(Direction.EAST, FacingUtil.Sideness.LEFT, context.getClickedFace(), context.getLevel(), context.getClickedPos());
         var westConnection = checkSurgeConnection(Direction.WEST, FacingUtil.Sideness.RIGHT, context.getClickedFace(), context.getLevel(), context.getClickedPos());
         var upConnection = checkSurgeConnection(Direction.SOUTH, FacingUtil.Sideness.TOP, context.getClickedFace(), context.getLevel(), context.getClickedPos());
@@ -203,7 +202,7 @@ public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> impleme
 
     private boolean checkSurgeConnection(Direction direction, FacingUtil.Sideness sideness, Direction clickedFace, Level level, BlockPos clickedPos) {
         var relativeBlockstate = level.getBlockState(clickedPos.relative(clickedFace.getAxis().isVertical() ? direction : FacingUtil.getFacingFromSide(clickedFace, sideness)));
-        return relativeBlockstate.getBlock() instanceof SoulPipeBlock || relativeBlockstate.getBlock().equals(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.getKey().get());
+        return relativeBlockstate.getBlock() instanceof SoulPipeBlock || relativeBlockstate.getBlock().equals(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.block().get());
     }
 
     @Override
@@ -214,7 +213,7 @@ public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> impleme
             var needStateRefresh = false;
             var originalPipeConnection = state.getValue(TOP_CONN);
             var pipeBlockstate = level.getBlockState(pos.relative(facing));
-            var pipeConnection = pipeBlockstate.getBlock() instanceof SoulPipeBlock || pipeBlockstate.getBlock().equals(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.getKey().get());
+            var pipeConnection = pipeBlockstate.getBlock() instanceof SoulPipeBlock || pipeBlockstate.getBlock().equals(IndustrialForegoingSouls.SOUL_SURGE_BLOCK.block().get());
             state = state.setValue(TOP_CONN, pipeConnection);
             if (originalPipeConnection != pipeConnection) {
                 needStateRefresh = true;

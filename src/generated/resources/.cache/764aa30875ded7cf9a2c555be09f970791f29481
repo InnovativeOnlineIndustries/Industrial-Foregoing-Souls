@@ -1,2 +1,4 @@
-// 1.20.1	2023-12-08T20:36:55.0476673	Tags for minecraft:block mod id industrialforegoingsouls
-1a1a6aac9c107ca8eaffa566823553a9c6d8e0f3 data/minecraft/tags/blocks/mineable/pickaxe.json
+// 1.21.1	2024-10-05T14:38:12.0641189	Tags for minecraft:block mod id industrialforegoingsouls
+10beb4b66757e0aa996cb24f084217020071c32c data/c/tags/block/tick_acceleration_disallowed.json
+10beb4b66757e0aa996cb24f084217020071c32c data/industrialforegoingsouls/tags/block/cant_accelerate.json
+1a1a6aac9c107ca8eaffa566823553a9c6d8e0f3 data/minecraft/tags/block/mineable/pickaxe.json

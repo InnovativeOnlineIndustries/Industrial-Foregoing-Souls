@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 
 public class DefaultSoulNetworkElement extends NetworkElement {
 
-    public static final ResourceLocation ID = new ResourceLocation(IndustrialForegoingSouls.MOD_ID, "default_souls");
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(IndustrialForegoingSouls.MOD_ID, "default_souls");
 
     public DefaultSoulNetworkElement(Level level, BlockPos pos) {
         super(level, pos);
