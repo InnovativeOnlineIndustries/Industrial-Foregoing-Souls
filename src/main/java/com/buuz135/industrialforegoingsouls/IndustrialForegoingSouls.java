@@ -6,7 +6,6 @@ import com.buuz135.industrialforegoingsouls.block.SoulSurgeBlock;
 import com.buuz135.industrialforegoingsouls.block_network.DefaultSoulNetworkElement;
 import com.buuz135.industrialforegoingsouls.block_network.SoulNetwork;
 import com.buuz135.industrialforegoingsouls.data.IFSoulsBiomeTagProvider;
-import com.buuz135.industrialforegoingsouls.data.IFSoulsBlockstateProvider;
 import com.buuz135.industrialforegoingsouls.data.IFSoulsLangProvider;
 import com.buuz135.industrialforegoingsouls.data.IFSoulsRecipeProvider;
 import com.buuz135.industrialforegoingsouls.data.IFSoulsTagProvider;
@@ -82,6 +81,5 @@ public class IndustrialForegoingSouls extends ModuleController {
         event.getGenerator().addProvider(true, new IFSoulsRecipeProvider(event.getGenerator(), event.getLookupProvider()));
         event.getGenerator().addProvider(true, new IFSoulsTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), MOD_ID, event.getExistingFileHelper()));
         event.getGenerator().addProvider(true, new IFSoulsBiomeTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), MOD_ID, event.getExistingFileHelper()));
-        event.getGenerator().addProvider(true, new IFSoulsBlockstateProvider(event.getGenerator().getPackOutput(), MOD_ID, event.getExistingFileHelper()));
     }
 }
