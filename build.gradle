@@ -95,6 +95,7 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-forge-api:15.2.0.23")
     // at runtime, use the full JEI jar for Forge
     runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:15.2.0.23")
+    runtimeOnly fg.deobf("curse.maven:functional-storage-556861:5650296")
 
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 }

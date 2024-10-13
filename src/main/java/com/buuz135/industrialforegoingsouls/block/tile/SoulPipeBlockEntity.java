@@ -1,5 +1,6 @@
 package com.buuz135.industrialforegoingsouls.block.tile;
 
+import com.buuz135.industrialforegoingsouls.multiblock.IMultiblockElement;
 import com.hrznstudio.titanium.annotation.Save;
 import com.hrznstudio.titanium.block.BasicTileBlock;
 import net.minecraft.core.BlockPos;
@@ -12,14 +13,14 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class SoulPipeBlockEntity extends NetworkBlockEntity<SoulPipeBlockEntity> {
+public class SoulPipeBlockEntity extends NetworkBlockEntity<SoulPipeBlockEntity> implements IMultiblockElement {
 
     @Save
-    private boolean wip;
+    private BlockPos controllerPosition;
 
     public SoulPipeBlockEntity(BasicTileBlock<SoulPipeBlockEntity> base, BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
         super(base, blockEntityType, pos, state);
-        this.wip = false;
+        this.controllerPosition = pos;
     }
 
     @Override
@@ -44,4 +45,18 @@ public class SoulPipeBlockEntity extends NetworkBlockEntity<SoulPipeBlockEntity>
         super.invalidateCaps();
     }
 
+    @Override
+    public void setControllerPosition(BlockPos controllerPosition) {
+        this.controllerPosition = controllerPosition;
+    }
+
+    @Override
+    public BlockPos getControllerPosition() {
+        return controllerPosition;
+    }
+
+    @Override
+    public boolean hasController() {
+        return !this.getBlockPos().equals(this.controllerPosition);
+    }
 }

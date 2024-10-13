@@ -1,8 +1,6 @@
 package com.buuz135.industrialforegoingsouls;
 
-import com.buuz135.industrialforegoingsouls.block.SoulLaserBaseBlock;
-import com.buuz135.industrialforegoingsouls.block.SoulPipeBlock;
-import com.buuz135.industrialforegoingsouls.block.SoulSurgeBlock;
+import com.buuz135.industrialforegoingsouls.block.*;
 import com.buuz135.industrialforegoingsouls.block_network.DefaultSoulNetworkElement;
 import com.buuz135.industrialforegoingsouls.block_network.SoulNetwork;
 import com.buuz135.industrialforegoingsouls.data.*;
@@ -43,6 +41,9 @@ public class IndustrialForegoingSouls extends ModuleController {
     public static Pair<RegistryObject<Block>, RegistryObject<BlockEntityType<?>>> SOUL_PIPE_BLOCK = null;
     public static Pair<RegistryObject<Block>, RegistryObject<BlockEntityType<?>>> SOUL_SURGE_BLOCK = null;
 
+    public static Pair<RegistryObject<Block>, RegistryObject<BlockEntityType<?>>> PHANTOM_SOUL_DRIVE_CONTROLLER = null;
+    public static Pair<RegistryObject<Block>, RegistryObject<BlockEntityType<?>>> DRIVE_FRAME_BLOCK = null;
+
     public IndustrialForegoingSouls() {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> this::onClient);
         NetworkRegistry.INSTANCE.addFactory(SoulNetwork.SOUL_NETWORK, new SoulNetwork.Factory());
@@ -56,6 +57,8 @@ public class IndustrialForegoingSouls extends ModuleController {
         SOUL_LASER_BLOCK = this.getRegistries().registerBlockWithTile("soul_laser_base", SoulLaserBaseBlock::new, TAB);
         SOUL_PIPE_BLOCK = this.getRegistries().registerBlockWithTile("soul_network_pipe", SoulPipeBlock::new, TAB);
         SOUL_SURGE_BLOCK = this.getRegistries().registerBlockWithTile("soul_surge", SoulSurgeBlock::new, TAB);
+        PHANTOM_SOUL_DRIVE_CONTROLLER = this.getRegistries().registerBlockWithTile("phantom_soul_drive_controller", PhantomSoulDriveControllerBlock::new, TAB);
+        DRIVE_FRAME_BLOCK = this.getRegistries().registerBlockWithTile("drive_frame", DriveFrameBlock::new, TAB);
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -2,6 +2,7 @@ package com.buuz135.industrialforegoingsouls.block.tile;
 
 import com.buuz135.industrialforegoingsouls.block.SoulSurgeBlock;
 import com.buuz135.industrialforegoingsouls.config.ConfigSoulSurge;
+import com.buuz135.industrialforegoingsouls.multiblock.IMultiblockElement;
 import com.buuz135.industrialforegoingsouls.tag.SoulTags;
 import com.hrznstudio.titanium.annotation.Save;
 import com.hrznstudio.titanium.block.BasicTileBlock;
@@ -19,13 +20,16 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.Shapes;
 import org.jetbrains.annotations.NotNull;
 
-public class SoulSurgeBlockEntity extends NetworkBlockEntity<SoulSurgeBlockEntity> {
+public class SoulSurgeBlockEntity extends NetworkBlockEntity<SoulSurgeBlockEntity> implements IMultiblockElement {
 
     @Save
     private int tickingTime;
+    @Save
+    private BlockPos controllerPosition;
 
     public SoulSurgeBlockEntity(BasicTileBlock<SoulSurgeBlockEntity> base, BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
         super(base, blockEntityType, pos, state);
+        this.controllerPosition = pos;
     }
 
     @NotNull
@@ -85,5 +89,20 @@ public class SoulSurgeBlockEntity extends NetworkBlockEntity<SoulSurgeBlockEntit
                 }
             }
         }
+    }
+
+    @Override
+    public void setControllerPosition(BlockPos controllerPosition) {
+        this.controllerPosition = controllerPosition;
+    }
+
+    @Override
+    public BlockPos getControllerPosition() {
+        return controllerPosition;
+    }
+
+    @Override
+    public boolean hasController() {
+        return !this.getBlockPos().equals(this.controllerPosition);
     }
 }

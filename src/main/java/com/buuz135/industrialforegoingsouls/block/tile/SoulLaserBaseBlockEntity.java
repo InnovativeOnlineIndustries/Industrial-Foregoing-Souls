@@ -46,9 +46,9 @@ import java.util.List;
 public class SoulLaserBaseBlockEntity extends IndustrialMachineTile<SoulLaserBaseBlockEntity> implements ILaserBase<SoulLaserBaseBlockEntity> {
 
     @Save
-    private final ProgressBarComponent<SoulLaserBaseBlockEntity> work;
+    private ProgressBarComponent<SoulLaserBaseBlockEntity> work;
     @Save
-    private final SidedInventoryComponent<SoulLaserBaseBlockEntity> catalyst;
+    private SidedInventoryComponent<SoulLaserBaseBlockEntity> catalyst;
     @Save
     private int soulAmount;
     private boolean unloaded;
@@ -166,17 +166,17 @@ public class SoulLaserBaseBlockEntity extends IndustrialMachineTile<SoulLaserBas
         return super.canAcceptAugment(augment);
     }
 
-    @Override
-    public void clearRemoved() {
-        super.clearRemoved();
-        if (level instanceof ServerLevel serverLevel) {
-            serverLevel.getServer().submitAsync(() -> {
-                NetworkManager networkManager = NetworkManager.get(level);
+    private boolean hasBeenCreated = false;
 
-                if (networkManager.getElement(worldPosition) == null) {
-                    networkManager.addElement(createElement(level, worldPosition));
-                }
-            });
+    @Override
+    public void serverTick(Level level, BlockPos pos, BlockState state, SoulLaserBaseBlockEntity blockEntity) {
+        super.serverTick(level, pos, state, blockEntity);
+        if (!hasBeenCreated) {
+            NetworkManager networkManager = NetworkManager.get(level);
+            if (networkManager.getElement(worldPosition) == null) {
+                networkManager.addElement(createElement(level, worldPosition));
+            }
+            hasBeenCreated = true;
         }
     }
 

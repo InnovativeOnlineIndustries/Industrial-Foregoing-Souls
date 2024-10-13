@@ -8,6 +8,7 @@ import com.hrznstudio.titanium.block.tile.ITickableBlockEntity;
 import com.hrznstudio.titanium.block_network.NetworkManager;
 import com.hrznstudio.titanium.block_network.element.NetworkElement;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -15,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public abstract class NetworkBlockEntity<T extends ActiveTile<T>> extends ActiveTile<T> implements ITickableBlockEntity<T> {
+public abstract class NetworkBlockEntity<T extends ActiveTile<T>> extends ActiveTile<T> implements ITickableBlockEntity<T> implements I{
 
     private boolean unloaded;
 
@@ -29,17 +30,17 @@ public abstract class NetworkBlockEntity<T extends ActiveTile<T>> extends Active
         super.initClient();
     }
 
-    @Override
-    public void clearRemoved() {
-        super.clearRemoved();
-        if (level instanceof ServerLevel serverLevel) {
-            serverLevel.getServer().submitAsync(() -> {
-                NetworkManager networkManager = NetworkManager.get(level);
+    private boolean hasBeenCreated = false;
 
-                if (networkManager.getElement(worldPosition) == null) {
-                    networkManager.addElement(createElement(level, worldPosition));
-                }
-            });
+    @Override
+    public void serverTick(Level level, BlockPos pos, BlockState state, T blockEntity) {
+        super.serverTick(level, pos, state, blockEntity);
+        if (!hasBeenCreated) {
+            NetworkManager networkManager = NetworkManager.get(level);
+            if (networkManager.getElement(worldPosition) == null) {
+                networkManager.addElement(createElement(level, worldPosition));
+            }
+            hasBeenCreated = true;
         }
     }
 
