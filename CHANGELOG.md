@@ -1,3 +1,6 @@
+# Version 1.10.0
+* Updated to 1.21 by MrBysco
+
 # Version 1.0.9
 
 * Made Soul Surges able to connect from any side, closes #7
