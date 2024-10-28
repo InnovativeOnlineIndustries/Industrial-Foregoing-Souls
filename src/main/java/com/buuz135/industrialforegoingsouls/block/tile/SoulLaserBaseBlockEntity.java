@@ -103,14 +103,14 @@ public class SoulLaserBaseBlockEntity extends IndustrialMachineTile<SoulLaserBas
     }
 
     private void onWork() {
-        if (!catalyst.getStackInSlot(0).isEmpty() && catalyst.getStackInSlot(0).getItem().equals(ModuleCore.LASER_LENS[11].get()) && this.soulAmount + ConfigSoulLaserBase.SOULS_PER_OPERATION <= ConfigSoulLaserBase.SOUL_STORAGE_AMOUNT) {
+        if (!catalyst.getStackInSlot(0).isEmpty() && catalyst.getStackInSlot(0).getItem().equals(ModuleCore.LASER_LENS[11].get()) && this.soulAmount < ConfigSoulLaserBase.SOUL_STORAGE_AMOUNT) {
             VoxelShape box = Shapes.box(-1, 0, -1, 2, 3, 2).move(this.worldPosition.getX(), this.worldPosition.getY() - 1, this.worldPosition.getZ());
             List<LivingEntity> entities = this.level.getEntitiesOfClass(LivingEntity.class, box.bounds(), entity -> entity.getType().equals(EntityType.WARDEN));
             if (entities.size() > 0) {
                 LivingEntity first = entities.get(0);
                 if (first.getHealth() > ConfigSoulLaserBase.DAMAGE_PER_OPERATION || ConfigSoulLaserBase.KILL_WARDEN) {
                     first.hurt(first.damageSources().generic(), ConfigSoulLaserBase.DAMAGE_PER_OPERATION);
-                    this.soulAmount += ConfigSoulLaserBase.SOULS_PER_OPERATION;
+                    this.soulAmount = Math.min(ConfigSoulLaserBase.SOUL_STORAGE_AMOUNT, this.soulAmount + ConfigSoulLaserBase.SOULS_PER_OPERATION);
                     syncObject(this.soulAmount);
                 }
             }

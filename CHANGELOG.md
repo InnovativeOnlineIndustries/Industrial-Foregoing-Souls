@@ -1,3 +1,6 @@
+# Version 1.10.1
+* Added comparator support for the Soul Laser Base closes #11
+
 # Version 1.10.0
 * Updated to 1.21 by MrBysco
 
