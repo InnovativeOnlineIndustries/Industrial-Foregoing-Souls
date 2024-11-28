@@ -84,6 +84,7 @@ public class SoulLaserBaseBlockEntity extends IndustrialMachineTile<SoulLaserBas
         this.addInventory(catalyst = (SidedInventoryComponent<SoulLaserBaseBlockEntity>) new SidedInventoryComponent<SoulLaserBaseBlockEntity>("lens", 50, 24 + 18, 1, 0)
                         .setColor(DyeColor.BLUE)
                         .setRange(2, 3)
+                        .setSlotToItemStackRender(0, new ItemStack(ModuleCore.LASER_LENS[11].get()))
                         .setSlotLimit(1)
                 //.setInputFilter((stack, integer) -> stack.getItem() instanceof LaserLensItem)
         );
