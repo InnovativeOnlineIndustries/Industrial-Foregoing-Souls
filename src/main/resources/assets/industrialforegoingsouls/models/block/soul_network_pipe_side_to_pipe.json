@@ -5,6 +5,7 @@
     "1": "industrialforegoingsouls:block/soul_pipe_animation",
     "particle": "industrialforegoingsouls:block/soul_pipe"
   },
+  "render_type": "minecraft:cutout",
   "elements": [
     {
       "from": [
