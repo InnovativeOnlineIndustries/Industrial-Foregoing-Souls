@@ -6,6 +6,7 @@ import com.buuz135.industrial.module.ModuleCore;
 import com.buuz135.industrialforegoingsouls.IndustrialForegoingSouls;
 import com.buuz135.industrialforegoingsouls.block_network.DefaultSoulNetworkElement;
 import com.buuz135.industrialforegoingsouls.block_network.SoulNetwork;
+import com.buuz135.industrialforegoingsouls.capabilities.ISoulHandler;
 import com.buuz135.industrialforegoingsouls.client.SculkSoulTankScreenAddon;
 import com.buuz135.industrialforegoingsouls.config.ConfigSoulLaserBase;
 import com.hrznstudio.titanium.annotation.Save;
@@ -138,9 +139,11 @@ public class SoulLaserBaseBlockEntity extends IndustrialMachineTile<SoulLaserBas
         return soulAmount;
     }
 
-    public void useSoul() {
-        --this.soulAmount;
+    public int useSoul(int soulAmount) {
+        var oldAmount = this.soulAmount;
+        this.soulAmount = Math.max(0, this.soulAmount - soulAmount);
         syncObject(this.soulAmount);
+        return oldAmount - this.soulAmount;
     }
 
     @Override
@@ -166,47 +169,4 @@ public class SoulLaserBaseBlockEntity extends IndustrialMachineTile<SoulLaserBas
         return super.canAcceptAugment(augment);
     }
 
-    @Override
-    public void clearRemoved() {
-        super.clearRemoved();
-        if (level instanceof ServerLevel serverLevel) {
-            serverLevel.getServer().submitAsync(() -> {
-                NetworkManager networkManager = NetworkManager.get(level);
-
-                if (networkManager.getElement(worldPosition) == null) {
-                    networkManager.addElement(createElement(level, worldPosition));
-                }
-            });
-        }
-    }
-
-    @Override
-    public void onChunkUnloaded() {
-        super.onChunkUnloaded();
-        unloaded = true;
-    }
-
-    @Override
-    public void setRemoved() {
-        super.setRemoved();
-
-        if (!level.isClientSide && !unloaded) {
-            NetworkManager networkManager = NetworkManager.get(level);
-
-            NetworkElement pipe = networkManager.getElement(worldPosition);
-            if (pipe != null) {
-                //spawnDrops(pipe);
-            }
-
-            networkManager.removeElement(worldPosition);
-        }
-    }
-
-    protected NetworkElement createElement(Level level, BlockPos pos) {
-        return new DefaultSoulNetworkElement(level, pos);
-    }
-
-    public SoulNetwork getNetwork() {
-        return (SoulNetwork) NetworkManager.get(this.level).getElement(worldPosition).getNetwork();
-    }
 }

@@ -1,3 +1,6 @@
+# Version 1.10.2
+* Changed the Soul Laser Base to have a soul capability and the pipe network will now store the souls extracted from the pipes
+
 # Version 1.10.1
 * Added comparator support for the Soul Laser Base closes #11
 

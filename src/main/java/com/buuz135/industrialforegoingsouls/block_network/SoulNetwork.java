@@ -2,8 +2,10 @@ package com.buuz135.industrialforegoingsouls.block_network;
 
 import com.buuz135.industrialforegoingsouls.IndustrialForegoingSouls;
 import com.buuz135.industrialforegoingsouls.block.tile.SoulLaserBaseBlockEntity;
+import com.buuz135.industrialforegoingsouls.config.IFSoulsMachines;
 import com.hrznstudio.titanium.block_network.Network;
 import com.hrznstudio.titanium.block_network.NetworkFactory;
+import com.hrznstudio.titanium.block_network.NetworkManager;
 import com.hrznstudio.titanium.block_network.element.NetworkElement;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -20,47 +22,53 @@ public class SoulNetwork extends Network {
 
     public static ResourceLocation SOUL_NETWORK = ResourceLocation.fromNamespaceAndPath(IndustrialForegoingSouls.MOD_ID, "soul");
 
-    private List<NetworkElement> queueNetworkElements;
-    private List<NetworkElement> soulLaserDrills;
+    private int soulAmount;
 
-    public SoulNetwork(BlockPos originPos, String id) {
+    public SoulNetwork(BlockPos originPos, String id, int soulAmount) {
         super(originPos, id);
-        this.queueNetworkElements = new ArrayList<>();
-        this.soulLaserDrills = new ArrayList<>();
-    }
-
-    public void addElement(NetworkElement element) {
-        this.queueNetworkElements.add(element);
-    }
-
-    public void removeElement(NetworkElement element) {
-        var tile = element.getLevel().getBlockEntity(element.getPos());
-        if (tile instanceof SoulLaserBaseBlockEntity) this.soulLaserDrills.remove(element);
+        this.soulAmount = soulAmount;
     }
 
     @Override
     public void update(Level level) {
         super.update(level);
-        for (NetworkElement element : this.queueNetworkElements) {
-            var tile = element.getLevel().getBlockEntity(element.getPos());
-            if (tile instanceof SoulLaserBaseBlockEntity) {
-                this.soulLaserDrills.add(element);
-            }
-        }
-        this.queueNetworkElements.clear();
-
     }
 
     @Override
     public void onMergedWith(Network mainNetwork) {
         if (mainNetwork instanceof SoulNetwork matterNetwork) {
-
+            this.addSouls(null, matterNetwork.soulAmount);
         }
+    }
+
+    public int addSouls(Level level, int soulAmount){
+        var oldAmount = this.soulAmount;
+        this.soulAmount = Math.min(getMaxSouls(), soulAmount + oldAmount);
+        if (level != null) NetworkManager.get(level).setDirty(true);
+        return this.soulAmount - oldAmount;
+    }
+
+    public boolean useSoul(Level level){
+        if (this.soulAmount > 0) {
+            --this.soulAmount;
+            if (level != null) NetworkManager.get(level).setDirty(true);
+            return true;
+        }
+        return false;
+    }
+
+    public int getMaxSouls(){
+        return this.graph.getElements().size() * IFSoulsMachines.SOUL_AMOUNT_PER_PIPE;
+    }
+
+    public int getSoulAmount() {
+        return soulAmount;
     }
 
     @Override
     public CompoundTag writeToNbt(CompoundTag tag) {
         var nbt = super.writeToNbt(tag);
+        nbt.putInt("soulAmount", soulAmount);
         return nbt;
     }
 
@@ -69,9 +77,6 @@ public class SoulNetwork extends Network {
         return SOUL_NETWORK;
     }
 
-    public List<NetworkElement> getSoulLaserDrills() {
-        return soulLaserDrills;
-    }
 
     public static class Factory implements NetworkFactory {
 
@@ -79,12 +84,12 @@ public class SoulNetwork extends Network {
 
         @Override
         public Network create(BlockPos pos) {
-            return new SoulNetwork(pos, NetworkFactory.randomString(new Random(), 8));
+            return new SoulNetwork(pos, NetworkFactory.randomString(new Random(), 8), 0);
         }
 
         @Override
         public Network create(CompoundTag tag) {
-            SoulNetwork network = new SoulNetwork(BlockPos.of(tag.getLong("origin")), tag.getString("id"));
+            SoulNetwork network = new SoulNetwork(BlockPos.of(tag.getLong("origin")), tag.getString("id"), tag.getInt("soulAmount"));
 
             LOGGER.debug("Deserialized matter network {} of type {}", network.getId(), network.getType().toString());
 

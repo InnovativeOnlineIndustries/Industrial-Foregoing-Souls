@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class SoulLaserBaseBlock extends IndustrialBlock<SoulLaserBaseBlockEntity> implements INetworkDirectionalConnection {
+public class SoulLaserBaseBlock extends IndustrialBlock<SoulLaserBaseBlockEntity>{
 
     public SoulLaserBaseBlock() {
         super("soul_laser_base", BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK), SoulLaserBaseBlockEntity.class, ModuleResourceProduction.TAB_RESOURCE);
@@ -28,11 +28,6 @@ public class SoulLaserBaseBlock extends IndustrialBlock<SoulLaserBaseBlockEntity
     @Override
     public void registerRecipe(RecipeOutput consumer) {
         //TODO
-    }
-
-    @Override
-    public boolean canConnect(BlockState state, Direction direction) {
-        return direction == Direction.UP;
     }
 
     @Override

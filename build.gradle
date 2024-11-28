@@ -74,7 +74,7 @@ repositories {
 dependencies {
     compileOnly("mezz.jei:jei-1.21.1-neoforge-api:${jei_version}")
     runtimeOnly("mezz.jei:jei-1.21.1-neoforge:${jei_version}")
-    implementation project.dependencies.create('com.hrznstudio:titanium:1.21-4.0.21')
+    implementation project.dependencies.create('com.hrznstudio:titanium:1.21-4.0.30')
     implementation project.dependencies.create('com.buuz135:industrialforegoing:1.21-3.6.13')
     implementation "vazkii.patchouli:Patchouli:${patchouli_version}"
     compileOnly "dev.emi:emi-neoforge:${emi_version}:api"

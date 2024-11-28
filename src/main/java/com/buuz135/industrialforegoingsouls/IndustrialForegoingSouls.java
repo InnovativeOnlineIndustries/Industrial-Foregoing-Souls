@@ -3,8 +3,11 @@ package com.buuz135.industrialforegoingsouls;
 import com.buuz135.industrialforegoingsouls.block.SoulLaserBaseBlock;
 import com.buuz135.industrialforegoingsouls.block.SoulPipeBlock;
 import com.buuz135.industrialforegoingsouls.block.SoulSurgeBlock;
+import com.buuz135.industrialforegoingsouls.block.tile.SoulLaserBaseBlockEntity;
 import com.buuz135.industrialforegoingsouls.block_network.DefaultSoulNetworkElement;
 import com.buuz135.industrialforegoingsouls.block_network.SoulNetwork;
+import com.buuz135.industrialforegoingsouls.capabilities.SLBSoulCap;
+import com.buuz135.industrialforegoingsouls.capabilities.SoulCapabilities;
 import com.buuz135.industrialforegoingsouls.data.IFSoulsBiomeTagProvider;
 import com.buuz135.industrialforegoingsouls.data.IFSoulsLangProvider;
 import com.buuz135.industrialforegoingsouls.data.IFSoulsRecipeProvider;
@@ -13,18 +16,22 @@ import com.hrznstudio.titanium.block_network.NetworkRegistry;
 import com.hrznstudio.titanium.block_network.element.NetworkElementRegistry;
 import com.hrznstudio.titanium.datagenerator.loot.TitaniumLootTableProvider;
 import com.hrznstudio.titanium.datagenerator.model.BlockItemModelGeneratorProvider;
+import com.hrznstudio.titanium.event.handler.EventManager;
 import com.hrznstudio.titanium.module.BlockWithTile;
 import com.hrznstudio.titanium.module.ModuleController;
 import com.hrznstudio.titanium.network.NetworkHandler;
 import com.hrznstudio.titanium.tab.TitaniumTab;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.List;
@@ -32,7 +39,6 @@ import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-// The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(IndustrialForegoingSouls.MOD_ID)
 public class IndustrialForegoingSouls extends ModuleController {
 
@@ -51,6 +57,14 @@ public class IndustrialForegoingSouls extends ModuleController {
         }
         NetworkRegistry.INSTANCE.addFactory(SoulNetwork.SOUL_NETWORK, new SoulNetwork.Factory());
         NetworkElementRegistry.INSTANCE.addFactory(DefaultSoulNetworkElement.ID, new DefaultSoulNetworkElement.Factory());
+        EventManager.mod(RegisterCapabilitiesEvent.class).process(event -> {
+            event.registerBlock(SoulCapabilities.BLOCK, (level, blockPos, blockState, blockEntity, direction) -> {
+                if (direction == Direction.UP && blockEntity instanceof SoulLaserBaseBlockEntity soulLaserBaseBlockEntity){
+                    return new SLBSoulCap(soulLaserBaseBlockEntity);
+                }
+                return null;
+            }, SOUL_LASER_BLOCK.block().get());
+        }).subscribe();
     }
 
 

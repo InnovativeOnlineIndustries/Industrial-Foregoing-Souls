@@ -40,12 +40,10 @@ public class SoulSurgeBlockEntity extends NetworkBlockEntity<SoulSurgeBlockEntit
         if (state.getValue(SoulSurgeBlock.ENABLED)) {
             if (tickingTime <= 0) {
                 var network = getNetwork();
-                for (NetworkElement soulLaserDrill : network.getSoulLaserDrills()) {
-                    var soulTile = soulLaserDrill.getLevel().getBlockEntity(soulLaserDrill.getPos());
-                    if (soulTile instanceof SoulLaserBaseBlockEntity soulLaserBaseBlockEntity && soulLaserBaseBlockEntity.getSoulAmount() > 0) {
-                        soulLaserBaseBlockEntity.useSoul();
+                if (network != null) {
+                    if (network.getSoulAmount() > 0) {
+                        network.useSoul(this.level);
                         tickingTime = ConfigSoulSurge.SOUL_TIME;
-                        break;
                     }
                 }
             }

@@ -2,6 +2,7 @@ package com.buuz135.industrialforegoingsouls.block;
 
 import com.buuz135.industrialforegoingsouls.IndustrialForegoingSouls;
 import com.buuz135.industrialforegoingsouls.block.tile.SoulPipeBlockEntity;
+import com.buuz135.industrialforegoingsouls.capabilities.SoulCapabilities;
 import com.buuz135.industrialforegoingsouls.config.IFSoulsClient;
 import com.google.common.collect.ImmutableMap;
 import com.hrznstudio.titanium.block.BasicTileBlock;
@@ -93,10 +94,13 @@ public class SoulPipeBlock extends BasicTileBlock<SoulPipeBlockEntity> implement
 
     protected PipeState getConnectionType(Level world, BlockPos pos, Direction direction, BlockState state) {
         var relativeState = world.getBlockState(pos.relative(direction));
-        if (relativeState.getBlock() instanceof SoulPipeBlock || relativeState.getBlock() instanceof SoulSurgeBlock || relativeState.getBlock().equals(Blocks.STONE_BRICKS)) {
+        if (relativeState.getBlock() instanceof SoulPipeBlock || relativeState.getBlock() instanceof SoulSurgeBlock) {
             return PipeState.PIPE;
         }
         if (relativeState.getBlock() instanceof INetworkDirectionalConnection networkDirectionalConnection && networkDirectionalConnection.canConnect(relativeState, direction.getOpposite())) {
+            return PipeState.BLOCK;
+        }
+        if (world.getCapability(SoulCapabilities.BLOCK, pos.relative(direction), direction.getOpposite()) != null){
             return PipeState.BLOCK;
         }
         return PipeState.NO;

@@ -22,16 +22,10 @@ public class DefaultSoulNetworkElement extends NetworkElement {
     @Override
     public void joinNetwork(Network network) {
         super.joinNetwork(network);
-        if (network instanceof SoulNetwork matterNetwork) {
-            matterNetwork.addElement(this);
-        }
     }
 
     @Override
     public void leaveNetwork() {
-        if (this.network instanceof SoulNetwork matterNetwork) {
-            matterNetwork.removeElement(this);
-        }
         super.leaveNetwork();
     }
 
