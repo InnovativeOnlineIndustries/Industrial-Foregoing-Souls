@@ -36,7 +36,9 @@ public class SLBSoulCap implements ISoulHandler{
         if (action.execute()){
             return blockEntity.useSoul(maxDrain);
         } else {
-            return Math.max(0, this.blockEntity.getSoulAmount() - maxDrain);
+            var oldAmount = this.blockEntity.getSoulAmount();
+            var newAmount = Math.max(0, this.blockEntity.getSoulAmount() - maxDrain);
+            return oldAmount - newAmount;
         }
     }
 }
