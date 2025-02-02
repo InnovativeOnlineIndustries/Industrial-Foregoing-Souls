@@ -44,7 +44,7 @@ public class DefaultSoulNetworkElement extends NetworkElement {
         if (this.level != null){
             var state = this.level.getBlockState(this.pos);
             if (state.getBlock() instanceof INetworkDirectionalConnection networkDirectionalConnection) {
-                return networkDirectionalConnection.canConnect(state, direction);
+                return networkDirectionalConnection.canConnect(this.level, this.pos, state, direction);
             }
         }
         return true;

@@ -97,7 +97,7 @@ public class SoulPipeBlock extends BasicTileBlock<SoulPipeBlockEntity> implement
         if (relativeState.getBlock() instanceof SoulPipeBlock || relativeState.getBlock() instanceof SoulSurgeBlock) {
             return PipeState.PIPE;
         }
-        if (relativeState.getBlock() instanceof INetworkDirectionalConnection networkDirectionalConnection && networkDirectionalConnection.canConnect(relativeState, direction.getOpposite())) {
+        if (relativeState.getBlock() instanceof INetworkDirectionalConnection networkDirectionalConnection && networkDirectionalConnection.canConnect(world, pos, relativeState, direction.getOpposite())) {
             return PipeState.BLOCK;
         }
         if (world.getCapability(SoulCapabilities.BLOCK, pos.relative(direction), direction.getOpposite()) != null){
@@ -158,11 +158,6 @@ public class SoulPipeBlock extends BasicTileBlock<SoulPipeBlockEntity> implement
     }
 
     @Override
-    public boolean canConnect(BlockState state, Direction direction) {
-        return true;
-    }
-
-    @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         for (Direction direction : Direction.values()) {
             var connected = state.getValue(DIRECTIONS.get(direction)) != PipeState.NO;
@@ -197,6 +192,11 @@ public class SoulPipeBlock extends BasicTileBlock<SoulPipeBlockEntity> implement
     @Override
     public FluidState getFluidState(BlockState p_56969_) {
         return p_56969_.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(p_56969_);
+    }
+
+    @Override
+    public boolean canConnect(Level level, BlockPos blockPos, BlockState blockState, Direction direction) {
+        return true;
     }
 
     public enum PipeState implements StringRepresentable {

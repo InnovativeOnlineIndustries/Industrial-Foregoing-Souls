@@ -142,7 +142,7 @@ public class SoulSurgeBlock extends BasicTileBlock<SoulSurgeBlockEntity> impleme
     }
 
     @Override
-    public boolean canConnect(BlockState state, Direction direction) {
+    public boolean canConnect(Level level, BlockPos blockPos, BlockState state, Direction direction) {
         var pointing = state.getValue(RotatableBlock.FACING_ALL);
         if (pointing.getAxis().isVertical()) {
             if (direction == Direction.EAST) {
