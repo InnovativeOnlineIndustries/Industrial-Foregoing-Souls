@@ -1,3 +1,9 @@
+# Version 1.10.5
+* Changed Network Construction to onLoad and added safety checks to not chunk, closes #16 closes #17
+
+# Version 1.10.4
+* Updated to latest titanium
+
 # Version 1.10.3
 * Fixed Capability simulation
 

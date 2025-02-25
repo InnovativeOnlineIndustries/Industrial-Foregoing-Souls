@@ -5,6 +5,7 @@ import com.buuz135.industrialforegoingsouls.block_network.SoulNetwork;
 import com.hrznstudio.titanium.block.BasicTileBlock;
 import com.hrznstudio.titanium.block.tile.ActiveTile;
 import com.hrznstudio.titanium.block.tile.ITickableBlockEntity;
+import com.hrznstudio.titanium.block_network.Network;
 import com.hrznstudio.titanium.block_network.NetworkManager;
 import com.hrznstudio.titanium.block_network.element.NetworkElement;
 import net.minecraft.core.BlockPos;
@@ -30,16 +31,14 @@ public abstract class NetworkBlockEntity<T extends ActiveTile<T>> extends Active
     }
 
     @Override
-    public void clearRemoved() {
-        super.clearRemoved();
+    public void onLoad() {
+        super.onLoad();
         if (level instanceof ServerLevel serverLevel) {
-            serverLevel.getServer().submitAsync(() -> {
-                NetworkManager networkManager = NetworkManager.get(level);
-
-                if (networkManager.getElement(worldPosition) == null) {
-                    networkManager.addElement(createElement(level, worldPosition));
-                }
-            });
+            NetworkManager networkManager = NetworkManager.get(serverLevel);
+            if (networkManager.getElement(worldPosition) == null) {
+                var element = createElement(serverLevel, worldPosition);
+                networkManager.addElement(element);
+            }
         }
     }
 
