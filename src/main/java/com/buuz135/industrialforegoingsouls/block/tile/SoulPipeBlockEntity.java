@@ -29,8 +29,13 @@ public class SoulPipeBlockEntity extends NetworkBlockEntity<SoulPipeBlockEntity>
             if (capability != null) {
                 var network = getNetwork();
                 if (network != null) {
-                    var simulated = capability.drain(4, ISoulHandler.Action.SIMULATE);
-                    capability.drain(network.addSouls(this.level, simulated), ISoulHandler.Action.EXECUTE);
+                    var simulatedFill = capability.fill(4, ISoulHandler.Action.SIMULATE);
+                    var filled = capability.fill(network.drainSouls(this.level, simulatedFill), ISoulHandler.Action.EXECUTE);
+                    // don't try to fill and drain on the same tick
+                    if (filled == 0) {
+                        var simulatedDrain = capability.drain(4, ISoulHandler.Action.SIMULATE);
+                        capability.drain(network.addSouls(this.level, simulatedDrain), ISoulHandler.Action.EXECUTE);                            
+                    }
                 }
             }
         }

@@ -48,6 +48,13 @@ public class SoulNetwork extends Network {
         return this.soulAmount - oldAmount;
     }
 
+    public int drainSouls(Level level, int soulAmount){
+        var oldAmount = this.soulAmount;
+        this.soulAmount = Math.max(0, oldAmount - soulAmount);
+        if (level != null) NetworkManager.get(level).setDirty(true);
+        return oldAmount - this.soulAmount;
+    }
+
     public boolean useSoul(Level level){
         if (this.soulAmount > 0) {
             --this.soulAmount;
