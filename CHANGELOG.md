@@ -1,3 +1,9 @@
+# Version 1.10.6
+* Update laser drill recipe - Satherov
+* ADD PT_BR localization - PrincessStelllar
+* tr_tr.json Turkish Localization - RuyaSavascisi
+* Soul pipes can now push souls to containers - jshipley 
+
 # Version 1.10.5
 * Changed Network Construction to onLoad and added safety checks to not chunk, closes #16 closes #17
 
