@@ -206,7 +206,7 @@ public class SoulPipeBlock extends BasicTileBlock<SoulPipeBlockEntity> implement
 
         @Override
         public String getSerializedName() {
-            return this.name().toLowerCase();
+            return this.name().toLowerCase(Locale.ROOT);
         }
     }
 }

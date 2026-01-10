@@ -40,7 +40,7 @@ jobs:
             1.21.1
           java: 21
           name: ""
-          changelog: "https://github.com/InnovativeOnlineIndustries/Industrial-Foregoing-Souls/blob/1.21/CHANGELOG.md"
+          changelog: "https://github.com/InnovativeOnlineIndustries/Industrial-Foregoing-Souls/blob/master/CHANGELOG.md"
           dependencies: |
             titanium | depends
             industrial-foregoing | depends

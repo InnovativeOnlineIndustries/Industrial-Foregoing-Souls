@@ -1,8 +1,13 @@
+# Version 1.10.7
+* ru_ru.json add Russian language - name1es-s
+* Updated Soul Laser Base to accept wardens tag - Eqis-Edu
+* Fixed crash when using Turkish language closes #30
+
 # Version 1.10.6
 * Update laser drill recipe - Satherov
 * ADD PT_BR localization - PrincessStelllar
 * tr_tr.json Turkish Localization - RuyaSavascisi
-* Soul pipes can now push souls to containers - jshipley 
+* Soul pipes can now push souls to containers - jshipley
 
 # Version 1.10.5
 * Changed Network Construction to onLoad and added safety checks to not chunk, closes #16 closes #17
