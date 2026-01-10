@@ -4,17 +4,12 @@ import com.buuz135.industrial.block.resourceproduction.tile.ILaserBase;
 import com.buuz135.industrial.block.tile.IndustrialMachineTile;
 import com.buuz135.industrial.module.ModuleCore;
 import com.buuz135.industrialforegoingsouls.IndustrialForegoingSouls;
-import com.buuz135.industrialforegoingsouls.block_network.DefaultSoulNetworkElement;
-import com.buuz135.industrialforegoingsouls.block_network.SoulNetwork;
-import com.buuz135.industrialforegoingsouls.capabilities.ISoulHandler;
 import com.buuz135.industrialforegoingsouls.client.SculkSoulTankScreenAddon;
 import com.buuz135.industrialforegoingsouls.config.ConfigSoulLaserBase;
 import com.hrznstudio.titanium.annotation.Save;
 import com.hrznstudio.titanium.api.IFactory;
 import com.hrznstudio.titanium.api.augment.AugmentTypes;
 import com.hrznstudio.titanium.api.client.IScreenAddon;
-import com.hrznstudio.titanium.block_network.NetworkManager;
-import com.hrznstudio.titanium.block_network.element.NetworkElement;
 import com.hrznstudio.titanium.client.screen.addon.ProgressBarScreenAddon;
 import com.hrznstudio.titanium.component.energy.EnergyStorageComponent;
 import com.hrznstudio.titanium.component.inventory.SidedInventoryComponent;
@@ -24,8 +19,10 @@ import com.hrznstudio.titanium.item.AugmentWrapper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -107,7 +104,7 @@ public class SoulLaserBaseBlockEntity extends IndustrialMachineTile<SoulLaserBas
     private void onWork() {
         if (!catalyst.getStackInSlot(0).isEmpty() && catalyst.getStackInSlot(0).getItem().equals(ModuleCore.LASER_LENS[11].get()) && this.soulAmount < ConfigSoulLaserBase.SOUL_STORAGE_AMOUNT) {
             VoxelShape box = Shapes.box(-1, 0, -1, 2, 3, 2).move(this.worldPosition.getX(), this.worldPosition.getY() - 1, this.worldPosition.getZ());
-            List<LivingEntity> entities = this.level.getEntitiesOfClass(LivingEntity.class, box.bounds(), entity -> entity.getType().equals(EntityType.WARDEN));
+            List<LivingEntity> entities = this.level.getEntitiesOfClass(LivingEntity.class, box.bounds(), entity -> entity.getType().equals(EntityType.WARDEN) || entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath("c","wardens"))));
             if (entities.size() > 0) {
                 LivingEntity first = entities.get(0);
                 if (first.getHealth() > ConfigSoulLaserBase.DAMAGE_PER_OPERATION || ConfigSoulLaserBase.KILL_WARDEN) {
